@@ -1,0 +1,2 @@
+# pssample
+PowerShellサンプルコード
