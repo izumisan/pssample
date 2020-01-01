@@ -30,3 +30,22 @@ $write_content = "one`r`ntwo`r`nthree"
 echo $write_content | Out-File -FilePath "out_file.txt"
 # リダイレクトによるファイル書き出し
 echo $write_content > "out_file2.txt"
+
+
+# csv
+#-------------------------------------------------------------------------------
+# Import-Csv でcsvファイルを読み込める
+$csv = Import-Csv -Path "sample.csv"
+echo $csv
+# Countでレコード数（ヘッダー行除く）を取得する
+echo ('$csv.Count: ' + $csv.Count)
+# インデックス指定でレコード取得
+echo ("[0]: {id: " + $csv[0].id + ", name: " + $csv[0].name + ", value: " + $csv[0].value + ", enabled: " + $csv[0].enabled + "}")
+foreach($item in $csv) {
+    # ヘッダーラベルがそのままプロパティとなる
+    echo ("id: " + $item.id + ", name: " + $item.name + ", value: " + $item.value + ", enabled: " + $item.enabled)
+}
+
+# json
+
+# xml
