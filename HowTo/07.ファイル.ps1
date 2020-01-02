@@ -45,7 +45,17 @@ foreach($item in $csv) {
     # ヘッダーラベルがそのままプロパティとなる
     echo ("id: " + $item.id + ", name: " + $item.name + ", value: " + $item.value + ", enabled: " + $item.enabled)
 }
+# 各要素は文字列で読み込まれる
+echo $csv[0].id.GetType()       #=> String
+echo $csv[0].enabled.GetType()  #=> String
+# 数値等は -as でキャストする
+echo ($csv[0].id -as [int]).GetType()        #=> Int32
+echo ($csv[0].enabled -as [bool]).GetType()  #=> Boolean
+
 
 # json
+#-------------------------------------------------------------------------------
+
 
 # xml
+#-------------------------------------------------------------------------------
