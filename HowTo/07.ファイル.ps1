@@ -59,3 +59,34 @@ echo ($csv[0].enabled -as [bool]).GetType()  #=> Boolean
 
 # xml
 #-------------------------------------------------------------------------------
+
+
+# etc
+#-------------------------------------------------------------------------------
+# カレントディレクトリ (Get-Location)
+# (Set-Locationでカレントディレクトリを設定できる)
+$current_dir = Get-Location
+echo $current_dir.Path
+
+# スクリプトディレクトリ
+echo $PSScriptRoot
+
+# ファイルの存在チェック (Test-Path)
+Test-Path sample.csv    #=> True
+Test-Path path/to/foo   #=> False
+
+# フォルダの存在チェック (Test-Path)
+Test-Path 'C:\Program Files'    #=> True
+
+# パス結合 (Join-Path)
+Join-Path foo bar  #=> foo\bar
+
+# 相対パス -> 絶対パス (Resolve-Path)
+echo (Resolve-Path sample.csv).Path
+
+# 絶対パス -> 相対パス (Resolve-Path)
+echo (Resolve-Path "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Relative)
+
+# ファイル検索 (Get-ChildItem)
+# (カレントディレクトリから*.ps1を検索する)
+echo (Get-ChildItem . -Filter *.ps1).Count
