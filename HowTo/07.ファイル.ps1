@@ -26,11 +26,22 @@ cat "sample.txt" | % { echo ("Line: " + $_) }
 # ファイル書き出し
 #-------------------------------------------------------------------------------
 $write_content = "one`r`ntwo`r`nthree"
+
 # Out-Fileによるファイル書き出し
 echo $write_content | Out-File -FilePath "out_file.txt"
+
 # リダイレクトによるファイル書き出し
 echo $write_content > "out_file2.txt"
 
+# UTF-8 with BOMでファイル出力
+# (Out-Fileやリダイレクトの既定値はUTF-16(BOM)っぽい？）
+echo $write_content | Out-File "out_file3.txt" -Encoding utf8
+
+# UTF-8 without BOMでファイル出力
+# (コマンドレットでは出来ないっぽいので.NETクラスを利用する)
+$writer = [System.IO.StreamWriter]::new( "out_file4.txt", $false, [System.Text.UTF8Encoding]::new() )
+$writer.Write( $write_content )
+$writer.Close()
 
 # csv
 #-------------------------------------------------------------------------------
