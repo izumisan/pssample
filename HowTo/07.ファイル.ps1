@@ -71,6 +71,9 @@ echo $current_dir.Path
 # スクリプトディレクトリ
 echo $PSScriptRoot
 
+# スクリプトのパス
+echo $MyInvocation.MyCommand.Path
+
 # ファイルの存在チェック (Test-Path)
 Test-Path sample.csv    #=> True
 Test-Path path/to/foo   #=> False
@@ -78,14 +81,25 @@ Test-Path path/to/foo   #=> False
 # フォルダの存在チェック (Test-Path)
 Test-Path 'C:\Program Files'    #=> True
 
-# パス結合 (Join-Path)
+# パスの結合 (Join-Path)
 Join-Path foo bar  #=> foo\bar
+
+# パスの分割 (Split-Path)
+Split-Path -Parent path/to/foo/bar  #=> path/to/foo
+Split-Path -Leaf   path/to/foo/bar  #=> bar
 
 # 相対パス -> 絶対パス (Resolve-Path)
 echo (Resolve-Path sample.csv).Path
 
 # 絶対パス -> 相対パス (Resolve-Path)
 echo (Resolve-Path "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Relative)
+
+# Resolve-Pathは存在しないパスを指定するとエラーとなる
+echo (Resolve-Path path/to/foo)
+
+# 相対パス -> 絶対パス (Convert-Path)
+Convert-Path .
+Convert-Path ..
 
 # ファイル検索 (Get-ChildItem)
 # (カレントディレクトリから*.ps1を検索する)
