@@ -74,3 +74,27 @@ foreach ( $item in $items ) {
         Default {}
     }
 }
+
+# 比較演算子
+#   -eq     ==
+#   -ne     !=
+#   -gt     >
+#   -ge     >=
+#   -lt     <
+#   -le     <=
+echo (1 -lt 2)  #=> True
+
+# 文字列比較（ワイルドカード・正規表現）
+#   -like       ワイルドカードによる文字列比較
+#   -notlike    ワイルドカードによる文字列比較（否定形）
+#   -match      正規表現による文字列比較
+#   -notmatch   正規表現による文字列比較（否定形）
+echo ("foo" -like "f*")  #=> True
+
+# 論理演算子
+#   -and    &&
+#   -or     ||
+#   -not    !
+#   -!      !
+echo ($true -and $false)  #=> False
+echo (-not $false)  #=> True
