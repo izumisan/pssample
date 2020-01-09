@@ -34,7 +34,8 @@ echo $write_content | Out-File -FilePath "out_file.txt"
 echo $write_content > "out_file2.txt"
 
 # UTF-8 with BOMでファイル出力
-# (Out-Fileやリダイレクトの既定値はUTF-16(BOM)っぽい？）
+# - PowerShell 6 までは、Out-Fileやリダイレクトの既定値はUTF-16(BOMあり)
+# - PowerShell 6 からは、UTF-8(BOMなし)らしい
 echo $write_content | Out-File "out_file3.txt" -Encoding utf8
 
 # UTF-8 without BOMでファイル出力
