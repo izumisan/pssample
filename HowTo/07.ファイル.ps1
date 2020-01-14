@@ -114,5 +114,13 @@ Convert-Path .
 Convert-Path ..
 
 # ファイル検索 (Get-ChildItem)
-# (カレントディレクトリから*.ps1を検索する)
-echo (Get-ChildItem . -Filter *.ps1).Count
+# (カレントディレクトリ下から*.ps1を抽出する)
+Get-ChildItem . -Filter *.ps1 -Recurse | % {
+    echo $_.FullName
+}
+
+# コマンドレットの場合、パス長が250～260文字で上限に達してしまいエラーとなる
+# .NET APIだとこの問題を回避できる
+[System.IO.Directory]::EnumerateFiles( ".", "*.ps1", [System.IO.SearchOption]::AllDirectories ) | % {
+    echo ([System.IO.Path]::GetFullPath( $_ ))
+}
