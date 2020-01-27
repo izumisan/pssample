@@ -22,6 +22,8 @@ echo "tab_1`ttab_2`ttab_3"  # `t タブ
 echo "CR_1`rCR_2`rCR_3"     # `r キャリッジリターン(CR)
 echo "LF_1`nLF_2`nLF_3"     # `n NewLine(LF)
 
+# 文字列のフォーマット (-f)
+echo ("{0} {1} {2:#.###}" -f "foo", "bar", [math]::pi)
 
 # 文字列の分割 (-split)
 $items = ("aaa,bbb,ccc" -split ",")  #=> [aaa, bbb, ccc]
