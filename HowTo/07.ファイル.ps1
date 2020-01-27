@@ -7,8 +7,13 @@ $read_content = Get-Content -Path "sample.txt"
 
 # Get-ContentはObject[]を返す
 echo $read_content.GetType().Name  # => Object[]
+
 # Countで行数が取得できる
 echo $read_content.Count  # => 3
+
+# -RawオプションでObject[]ではなくStringで取得する
+echo ((Get-Content -Path "sample.txt" -Raw).GetType())
+
 
 # cat は Get-Content のエイリアス
 echo (cat "sample.txt")
@@ -67,7 +72,17 @@ echo ($csv[0].enabled -as [bool]).GetType()  #=> Boolean
 
 # json
 #-------------------------------------------------------------------------------
+# ConvertFrom-Jsonでjson文字列からオブジェクトを取得する
+$json = ( Get-Content "sample.json" -Encoding UTF8 -Raw | ConvertFrom-Json )
+echo ("json.name={0}, json.value={1}, json.lucky={2}" -f $json.name, $json.value, $json.lucky)
 
+# ConvertTo-Jsonでハッシュテーブルからjson文字列を取得する
+$hash = @{
+    "key1" = "value1"
+    "key2" = "value2"
+    "key3" = "value3"
+}
+echo ($hash | ConvertTo-Json -Compress)  # -Compressで一行文字列
 
 # xml
 #-------------------------------------------------------------------------------
