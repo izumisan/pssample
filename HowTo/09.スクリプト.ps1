@@ -48,6 +48,18 @@ notepad.exe
 # オプションなしで外部コマンド起動後すぐにpowershellに制御が戻る. -Waitで外部コマンドの終了を待機する
 Start-Process -FilePath notepad.exe
 
+# このメッセージは、メモ帳を閉じる前に表示されている
+echo "This message will be written before notepad is terminated."
+
+Start-Process -FilePath notepad.exe -Wait -PassThru
+
+# このメッセージは、メモ帳を閉じた後にに表示される
+echo "This message will be written after is terminated."
+
+# 起動したプロセスの終了コードを取得する場合、
+# -PassThru オプションを指定しないと、ExitCodeで落ちる
+$process = Start-Process "notepad.exe" -Wait -PassThru
+echo ("exit: " + $process.ExitCode)
 
 # コマンド文字列の実行
 #-------------------------------------------------------------------------------
