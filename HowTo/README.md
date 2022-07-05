@@ -16,6 +16,8 @@
 - [コマンドレット](11.コマンドレット.ps1)
 - [モジュール](12.モジュール.ps1)
 - [C#コード](13.CSharpコード.ps1)
+- [PATHの追加](14.PATHの追加.ps1)
+- [コマンドライン出力を表示しない](15.コマンドライン出力を表示しない.ps1)
 
 # Tips
 
@@ -28,8 +30,8 @@
 ## エラー処理
 
 - コマンドレットで例外(エラー)が発生してもデフォルト環境では処理は中断せずに継続される
-- 同様に、デフォルト環境では`try～catch`でコマンドレットの例外は補足できない
-- エラーで処理を中断（`try～catch`で例外を補足）するには、`$ErrorActionPreference`を設定する必要がある
+- 同様に、デフォルト環境では`try～catch`でコマンドレットの例外は**捕捉できない**
+- エラーで処理を中断（`try～catch`で例外を捕捉）させるには、`$ErrorActionPreference`を設定する必要がある
     ```ps
     # エラーで処理を中断するようにする
     $ErrorActionPreference = "Stop"
@@ -40,3 +42,9 @@
     - Continue (既定値)
     - Suspend
     - SilentlyContinue
+
+## 変数宣言を強制する etc.
+
+- `Set-StrictMode -Version Latest`
+- ref.
+    - [Set-StrictModeについてちょっとだけ詳しく説明してみる - しばたテックブログ](https://blog.shibata.tech/entry/2015/11/10/233858)
